@@ -14,8 +14,7 @@ for (let i = 0; i < args.length; i++){
 
 function sortingByDate (outputFile){
     // Lecture du fichier JSON
-    fs.readFileSync('movies.json',{encoding: 'utf8'},function(err,data) {
-    //start = new Date().getTime();
+    fs.readFileSync(`${inputFile}`,{encoding: 'utf8'},function(err,data) {
     let movieData = JSON.parse(data);
     if(err) return console.error(err);
     sortByDate(movieData);  
@@ -25,8 +24,6 @@ function sortingByDate (outputFile){
         if(err)returnconsole.error(err);
         })
     })
-    // let stop = new Date().getTime();
-    // console.log("\n Benchmark " + (stop - start) + " ms");
 }
 
 

@@ -1,21 +1,20 @@
 let fs = require('fs');
 
-let inputFile
-let outputFile
+let inputFile;
+let outputFile;
 let args = process.argv
 
 for (let i = 0; i < args.length; i++) {
     if (args[i] == '-action' && args[i + 1] == 'sort_title') {
-        inputFile = args[i + 2]
-        outputFile = args[i + 3]
-        movieSorting(outputFile)
+        inputFile = args[i + 2];
+        outputFile = args[i + 3];
+        movieSorting(outputFile);
     }
 }
 
 function movieSorting (outputFile){
     // Lecture du fichier JSON
-    fs.readFileSync('movies.json',{encoding: 'utf8'},function(err,data) {
-    //start = new Date().getTime();
+    fs.readFileSync(`${inputFile}`,{encoding: 'utf8'},function(err,data) {
     let movieData = JSON.parse(data);
     if(err) return console.error(err);
     sortByName(movieData);  
@@ -25,11 +24,9 @@ function movieSorting (outputFile){
         if(err)returnconsole.error(err);
         })
     })
-    // let stop = new Date().getTime();
-    // console.log("\n Benchmark " + (stop - start) + " ms");
 }
 
-//module.exports = {
+
 //fonction d'échange
 function swap(tab, a, b) {
     let tmp = tab[a];

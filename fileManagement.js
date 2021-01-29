@@ -18,7 +18,7 @@ for (let i= 0; i< args.length; i++){
 function movieTransform (inputFile, outputFile){
   let movieData;
   //lire le fichier json d'entrée
-  fs.readFile('movies.json',{encoding: 'utf8'},function(err,data) {
+  fs.readFile(`${inputFile}`,{encoding: 'utf8'},function(err,data) {
     movieData = JSON.parse(data);
     if(err) return console.error(err);
     let countKey = Object.keys(movieData).length;  

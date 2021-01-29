@@ -16,14 +16,13 @@ for (let i=0; i<args.length; i++){
   }
 }
  
-// -----------------------Faut commenter y'a le bench dedans-------------------------------------------------
 let read = () => {
 
    let data = fs.readFileSync(`${inputFile}`)
-   
+       // Lancement du benchmark 
        let start = new Date().getTime();
         movieData = JSON.parse(data);
-      
+        // Parcours le tableau
         let countKey = Object.keys(movieData).length;
         
         for (i = 0; i < countKey; i++) {
@@ -31,12 +30,13 @@ let read = () => {
             let movieYear = movieDate.getFullYear();
             if (movieYear == year) {
                 if (sorted == 'true') {
-                    sortByName(movieData)
+                    sortByYear(movieData)
                 }
                 console.log(movieData[i]['title'])
             }
 
         }
+        // Fin du benchmark
         let stop = new Date().getTime();
         console.log("\n Benchmark " + (stop - start) + " ms");
     
@@ -50,7 +50,7 @@ function swap(tab,a,b){
     tab[b] = tmp;
 }
 
-function sortByName(array){
+function sortByYear(array){
     //pour i allant de (taille de T)-1 à 1
     for( let i = array.length -1; i>=1;i--){
         //pour j allant de 0 à i-1
