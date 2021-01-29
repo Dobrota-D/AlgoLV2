@@ -1,20 +1,40 @@
 let fs = require('fs');
 
-  // Lire le fichier .json
-  fs.readFile('movies.json',{encoding: 'utf8'}, function(err, data){
-      let moviesData = JSON.parse(data);
+let args = process.argv
+let inputFile; 
+let outputFile;
+
+for (let i = 0; i < args.length; i++){
+    if(args[i] == '-action' && args[i+1] == 'sort_date'){
+        inputFile = args[i + 2];
+        outputFile = args[i + 3];
+        sortingByDate(inputFile, outputFile);
+    }
+}
+function sortingByDate (inputFile, outputFile){
+     // Lecture du fichier JSON
+    fs.readFile('movies.json',{encoding: 'utf8'},function(err,data) {
+      let movieData = JSON.parse(data);
       if(err) return console.error(err);
-      // Tri et affiche les films par date croissante
-      sortByDate(moviesData);
-      console.log(moviesData)
-  })
+      let countKey = Object.keys(movieData).length;  
+
+      // Enregistrement des données dans le fichier de sortie après le tri par date
+    let stringOut = JSON.stringify(movieData,null,'\t')
+    fs.writeFile(outputFile,stringOut,function(err) {
+    if(err)returnconsole.error(err);
+    })
   
+  })
+
+}
+
 //fonction d'échange
 function swap(tab,a,b){
     let tmp = tab[a];
     tab[a] = tab[b];
     tab[b] = tmp;
 }
+  
   //tri par date
   function sortByDate(array){
       // Pour i allant de (taille de T)-1 à 1
@@ -29,3 +49,4 @@ function swap(tab,a,b){
          }
     }
 }
+ 

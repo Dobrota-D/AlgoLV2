@@ -17,16 +17,16 @@ for (let i=0; i<args.length; i++){
   }
 }
  
-//Faut petre lire le json movie
+// -----------------------Faut commenter y'a le bench dedans-------------------------------------------------
 let read = () => {
 
    let data = fs.readFileSync(`${inputFile}`)
    
- //       let start = new Date().getTime();
+       let start = new Date().getTime();
         movieData = JSON.parse(data);
       
         let countKey = Object.keys(movieData).length;
-        //et ptetre parcourir le json movie
+        
         for (i = 0; i < countKey; i++) {
             let movieDate = new Date(movieData[i]['release_date'] * 1000)
             let movieYear = movieDate.getFullYear();
@@ -38,12 +38,12 @@ let read = () => {
             }
 
         }
-   //     let stop = new Date().getTime();
-     //   console.log("\n Benchmark" + (stop - start) + "ms");
+        let stop = new Date().getTime();
+        console.log("\n Benchmark " + (stop - start) + " ms");
     
 }
-//read()
-benchmark.benchmark(read)
+read()
+
 //fonction d'échange
 function swap(tab,a,b){
     let tmp = tab[a];
