@@ -1,13 +1,5 @@
 let fs = require('fs');
 
-// Lire le fichier .json
-fs.readFile('movies.json', {
-    encoding: 'utf8'
-}, function (err, data) {
-    let moviesData = JSON.parse(data);
-    if (err) return console.error(err);
-    // Tri et affiche les films par date croissante
-
 let inputFile
 let outputFile
 let args = process.argv
@@ -16,34 +8,27 @@ for (let i = 0; i < args.length; i++) {
     if (args[i] == '-action' && args[i + 1] == 'sort_title') {
         inputFile = args[i + 2]
         outputFile = args[i + 3]
-        movieSorting(inputFile, outputFile)
+        movieSorting(outputFile)
     }
 }
 
-
-function movieSorting (inputFile, outputFile){
-    let movieData;
-    //lire le fichier json d'entrée
-    fs.readFile('movies.json',{encoding: 'utf8'},function(err,data) {
-      movieData = JSON.parse(data);
-      if(err) return console.error(err);
-      let countKey = Object.keys(movieData).length;  
-        
-        // Fonction d'enregistrement du fichier JSON
+function movieSorting (outputFile){
+    // Lecture du fichier JSON
+    fs.readFileSync('movies.json',{encoding: 'utf8'},function(err,data) {
+    //start = new Date().getTime();
+    let movieData = JSON.parse(data);
+    if(err) return console.error(err);
+    sortByName(movieData);  
+        // Enregistrement des données dans le fichier de sortie après le tri par date
         let stringOut = JSON.stringify(movieData,null,'\t')
         fs.writeFile(outputFile,stringOut,function(err) {
         if(err)returnconsole.error(err);
-      })
+        })
     })
-  }    
+    // let stop = new Date().getTime();
+    // console.log("\n Benchmark " + (stop - start) + " ms");
+}
 
-
-    sortByName(moviesData);
-    moviesData.forEach(moviesData => {
-        console.log(moviesData.title)
-    });
-
-})
 //module.exports = {
 //fonction d'échange
 function swap(tab, a, b) {

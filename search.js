@@ -1,5 +1,4 @@
 let fs = require('fs');
-const benchmark = require('./Benchmark');
 
 // déclaration de variables
 let args = process.argv
