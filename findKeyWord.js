@@ -1,3 +1,4 @@
+const { Console } = require('console');
 let fs = require('fs');
 const {
   title
@@ -5,8 +6,8 @@ const {
 
 let args = process.argv;
 let inputFile;
-let keyWord = args[5];
-let genre = args[6];
+let  genre = args[5];
+let  keyWord = args[6];
 
 /*console.log(args[5])
 for (let i = 0; i < args.length; i++) {
@@ -28,19 +29,24 @@ let countKey = Object.keys(moviesData).length;
 let movies = []
 //console.log(keyWord)
 for (i = 0; i < countKey; i++) {
+  //console.log(words)
   movie = hasGenres(moviesData[i].genres, genre)
+  //console.log(movie)
   //console.log(typeof movie)
   if (typeof movie != "object") {
+    //console.log(moviesData[i])
     movies.push(moviesData[i])
   }
 
 }
+//console.log(movies)
 let finalMovies = []
 for (let i = 0; i < movies.length; i++) {
   //regex pour split les mots espace , et . et les comparer 
   const words = movies[i].overview.split(/[\s,.]+/);
-  movie = hasKeyWord(words, keyWord)
   //console.log(words)
+  movie = hasKeyWord(words, keyWord)
+  //console.log(movies)
   if (typeof movie != "object") {
     finalMovies.push(movies[i])
   }
@@ -54,6 +60,7 @@ finalMovies.forEach(element => {
 
 function hasKeyWord(words, keyWord) {
   let movie = []
+ // console.log(words)
   for (let i = 0; i < words.length; i++) {
     const element = words[i];
     if (element == keyWord) {
@@ -70,7 +77,7 @@ function hasGenres(genres, genre) {
   if (genres) {
     for (let i = 0; i < genres.length; i++) {
       const element = genres[i];
-       //console.log(element)
+      // console.log(genre)
       if (element == genre) {
         movie = genres[i]
       }
